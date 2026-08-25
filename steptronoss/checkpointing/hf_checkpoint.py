@@ -59,6 +59,7 @@ def dump_safetensors(
     tokenizer_reference_path: str,
     models: list,
     model_cfg: Megatron3DParallelModelConfig | None = None,
+    lora_only: bool = False,
 ):
     # copy json configs
     if PM.world_rank == 0:
@@ -94,7 +95,14 @@ def dump_safetensors(
     for vp_rank, model in enumerate(models):
         torch.cuda.synchronize()
         torch.cuda.empty_cache()
-        weight: dict = unwrap_model(model).hf_state_dict()
+        if lora_only:
+            from steptronoss.model.lora import lora_state_dict
+
+            weight = lora_state_dict(unwrap_model(model))
+            if PM.i_am("DP", 0) and PM.i_am("TP", 0) and not weight:
+                raise RuntimeError("LoRA-only export requested, but no lora_a/lora_b parameters were found")
+        else:
+            weight = unwrap_model(model).hf_state_dict()
         if PM.i_am("DP", 0) and PM.i_am("TP", 0):
             chunk_id = vp_rank * PM.size_of("PP") + PM.rank_in("PP")
             file_path = f"model-{chunk_id + 1:05d}.safetensors"
@@ -106,6 +114,7 @@ def dump_safetensors(
         for k in list(weight):
             del weight[k]
     weight_map = all_gather_object(weight_map, group=PM.group_of("PP"))
+    total_sizes = all_gather_object(total_size, group=PM.group_of("PP"))
     all_weight_map = {}
     for wm in weight_map:
         all_weight_map |= wm
