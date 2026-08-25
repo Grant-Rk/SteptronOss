@@ -1,0 +1,712 @@
+2026-08-24 17:43:19.744 | INFO     | steptronoss.utils.optimizable:set_optimization:103 - Optimization set: 
+steptronoss.model.ep_dispatcher.token_dispatcher.TokenDispatcher -> alltoall
+steptronoss.model.common.attention_core.AttentionCore -> flash-attn
+steptronoss.model.utils.moe_utils.routed_grouped_ffn -> fused
+steptronoss.model.utils.moe_utils.moe_weighted_gather -> triton
+steptronoss.model.utils.moe_utils.grouped_gemm -> nv_grouped_gemm
+2026-08-24 17:43:23.759 | INFO     | steptronoss.initialize:set_mpu_random_seed:57 - > setting random seeds to 1234 ...
+2026-08-24 17:43:23.768 | INFO     | steptronoss.core.trainers.lm_trainer:before_train:78 - Printing training log to: [31]
+2026-08-24 17:43:25.055 | INFO     | steptronoss.utils.utils:profile_allreduce:390 - Profiling AllReduce... NCCL ENVs:
+2026-08-24 17:43:25.905 | INFO     | steptronoss.utils.utils:profile_allreduce:403 - Global allreduce (10 tries):
+>> [18.74, 50.05, 49.50, 50.22, 49.76, 49.01, 48.32, 50.02, 50.20, 48.57] GB/s
+2026-08-24 17:43:25.906 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group TP
+2026-08-24 17:43:26.974 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [TP] (10 tries):
+>> Avg [2.04, 239.85, 246.10, 253.19, 253.01, 252.69, 253.28, 252.06, 252.99, 224.59] GB/s
+>> Min [2.04, 239.81, 245.87, 253.10, 252.98, 252.62, 253.23, 252.02, 252.91, 224.40] GB/s
+2026-08-24 17:43:26.974 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group PP
+2026-08-24 17:43:28.675 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [PP] (10 tries):
+>> Avg [9.14, 12.15, 12.13, 12.23, 12.14, 12.17, 12.22, 12.20, 12.23, 12.23] GB/s
+>> Min [9.14, 12.15, 12.13, 12.23, 12.14, 12.17, 12.22, 12.20, 12.23, 12.23] GB/s
+2026-08-24 17:43:28.675 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group DP
+2026-08-24 17:43:30.390 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [DP] (10 tries):
+>> Avg [8.56, 12.21, 12.17, 12.20, 12.20, 12.26, 12.20, 12.20, 12.22, 12.21] GB/s
+>> Min [8.56, 12.21, 12.16, 12.20, 12.19, 12.25, 12.20, 12.20, 12.22, 12.21] GB/s
+2026-08-24 17:43:30.392 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group CP
+2026-08-24 17:43:32.038 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [CP] (10 tries):
+>> Avg [12.16, 12.16, 12.20, 12.20, 12.16, 12.18, 12.20, 12.22, 12.20, 12.22] GB/s
+>> Min [12.16, 12.16, 12.20, 12.20, 12.16, 12.18, 12.20, 12.22, 12.20, 12.22] GB/s
+2026-08-24 17:43:32.038 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group MP
+2026-08-24 17:43:32.814 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [MP] (10 tries):
+>> Avg [4.82, 50.23, 50.08, 51.21, 51.09, 49.82, 51.19, 49.49, 51.22, 51.22] GB/s
+>> Min [4.82, 50.22, 50.07, 51.20, 51.09, 49.81, 51.19, 49.49, 51.22, 51.21] GB/s
+2026-08-24 17:43:32.814 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EP
+2026-08-24 17:43:33.699 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EP] (10 tries):
+>> Avg [3.86, 50.99, 49.96, 49.29, 50.19, 49.47, 50.51, 50.79, 49.77, 51.17] GB/s
+>> Min [3.86, 50.99, 49.95, 49.28, 47.63, 49.46, 50.50, 50.78, 49.76, 51.16] GB/s
+2026-08-24 17:43:33.699 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group ETP
+2026-08-24 17:43:33.705 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [ETP] (10 tries):
+>> Avg [8341.37, 11616.64, 11134.12, 7662.89, 11304.02, 10786.74, 11419.94, 11741.15, 11182.20, 11511.12] GB/s
+>> Min [8256.50, 11570.49, 11066.77, 7489.83, 11244.78, 10551.71, 5932.54, 11683.30, 11066.77, 11428.62] GB/s
+2026-08-24 17:43:33.705 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EETP
+2026-08-24 17:43:34.105 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EETP] (10 tries):
+>> Avg [50.96, 51.18, 51.10, 49.98, 50.15, 50.97, 50.27, 51.14, 50.07, 50.65] GB/s
+>> Min [50.95, 51.18, 51.09, 49.97, 50.14, 50.96, 50.26, 51.13, 50.06, 49.64] GB/s
+2026-08-24 17:43:34.105 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EDP
+2026-08-24 17:43:34.111 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EDP] (10 tries):
+>> Avg [8007.28, 11775.33, 11950.19, 11800.83, 10197.16, 10733.31, 9542.71, 9998.59, 11700.24, 10764.65] GB/s
+>> Min [7981.55, 11538.66, 11865.08, 11491.24, 10118.95, 10658.97, 9500.12, 9857.35, 11522.81, 10672.53] GB/s
+2026-08-24 17:43:34.111 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EMP
+2026-08-24 17:43:35.007 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EMP] (10 tries):
+>> Avg [3.81, 49.39, 49.54, 49.04, 48.56, 49.39, 48.46, 49.61, 49.49, 48.50] GB/s
+>> Min [3.81, 49.38, 49.52, 49.02, 48.56, 49.39, 48.45, 49.61, 49.49, 48.50] GB/s
+2026-08-24 17:43:35.055 | INFO     | steptronoss.checkpointing.local_checkpoint:load_ckpt:249 - Loading safetensors from /data/plms/stepfun-ai/Step-3.7-Flash, pt weight will be skipped.
+2026-08-24 17:43:35.059 | INFO     | steptronoss.model.decoder_model:__init__:202 - {
+  pp0/vp0: {
+    0-22: {recompute: True}
+  }
+  pp1/vp0: {
+    23-44: {recompute: True}
+  }
+}
+2026-08-24 17:43:35.192 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:35.385 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:35.580 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:35.908 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:36.107 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:36.302 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:36.632 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:36.826 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:37.021 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:37.353 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:37.548 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:37.747 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:38.073 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:38.267 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:38.461 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:38.786 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:38.981 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:43:50.262 | INFO     | steptronoss.model.utils.utils:load_model_checkpoint:59 - <All keys matched successfully>
+2026-08-24 17:43:50.288 | INFO     | steptronoss.optimizer.utils:advanced_get_param_groups:67 - Optim group 0 -> # params: 7.516M; wd_mult: 1.0; lr_mult: 1.0
+2026-08-24 17:43:50.294 | INFO     | steptronoss.optimizer.base_gradient_manager:__init__:91 - Gradbuffer: ParamBucketKey(dtype=torch.bfloat16, allreduce_group='DP', signature='MUON:False'), dp_world_size: 2
+2026-08-24 17:43:54.247 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:488 - Sync point [ after dataloaders are built ]
+2026-08-24 17:43:54.675 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:488 - Sync point [ before the start of training step ]
+2026-08-24 17:58:13.568 | INFO     | steptronoss.utils.optimizable:set_optimization:103 - Optimization set: 
+steptronoss.model.ep_dispatcher.token_dispatcher.TokenDispatcher -> alltoall
+steptronoss.model.common.attention_core.AttentionCore -> flash-attn
+steptronoss.model.utils.moe_utils.routed_grouped_ffn -> fused
+steptronoss.model.utils.moe_utils.moe_weighted_gather -> triton
+steptronoss.model.utils.moe_utils.grouped_gemm -> nv_grouped_gemm
+2026-08-24 17:58:16.211 | INFO     | steptronoss.initialize:set_mpu_random_seed:57 - > setting random seeds to 1234 ...
+2026-08-24 17:58:16.219 | INFO     | steptronoss.core.trainers.lm_trainer:before_train:78 - Printing training log to: [31]
+2026-08-24 17:58:17.473 | INFO     | steptronoss.utils.utils:profile_allreduce:390 - Profiling AllReduce... NCCL ENVs:
+2026-08-24 17:58:17.473 | INFO     | steptronoss.utils.utils:profile_allreduce:393 - NCCL_DEBUG = INFO
+2026-08-24 17:58:17.473 | INFO     | steptronoss.utils.utils:profile_allreduce:393 - NCCL_DEBUG_SUBSYS = INIT,NET,COLL
+2026-08-24 17:58:18.763 | INFO     | steptronoss.utils.utils:profile_allreduce:403 - Global allreduce (10 tries):
+>> [8.27, 41.16, 39.12, 39.95, 15.55, 39.00, 40.01, 39.24, 40.76, 40.20] GB/s
+2026-08-24 17:58:18.763 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group TP
+2026-08-24 17:58:20.460 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [TP] (10 tries):
+>> Avg [1.69, 80.55, 94.40, 87.04, 89.56, 97.66, 93.40, 96.33, 87.39, 89.05] GB/s
+>> Min [1.69, 80.50, 94.27, 86.97, 89.33, 97.60, 93.37, 96.27, 87.34, 88.84] GB/s
+2026-08-24 17:58:20.461 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group PP
+2026-08-24 17:58:22.667 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [PP] (10 tries):
+>> Avg [7.68, 11.18, 11.26, 11.57, 11.50, 11.44, 11.19, 11.20, 11.15, 11.25] GB/s
+>> Min [7.68, 11.18, 11.26, 11.57, 11.49, 11.44, 11.19, 11.19, 11.15, 11.25] GB/s
+2026-08-24 17:58:22.667 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group DP
+2026-08-24 17:58:24.941 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [DP] (10 tries):
+>> Avg [7.72, 11.43, 11.46, 11.30, 11.32, 11.42, 11.24, 11.31, 11.11, 11.19] GB/s
+>> Min [7.72, 11.43, 11.46, 11.30, 11.32, 11.42, 11.24, 11.31, 11.10, 11.19] GB/s
+2026-08-24 17:58:24.943 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group CP
+2026-08-24 17:58:27.040 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [CP] (10 tries):
+>> Avg [11.43, 10.49, 11.31, 11.35, 11.54, 11.42, 11.31, 11.35, 11.38, 11.58] GB/s
+>> Min [11.43, 10.49, 11.31, 11.35, 11.54, 11.42, 11.31, 11.35, 11.38, 11.58] GB/s
+2026-08-24 17:58:27.040 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group MP
+2026-08-24 17:58:28.573 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [MP] (10 tries):
+>> Avg [3.61, 31.81, 31.42, 20.09, 32.78, 33.19, 35.56, 34.48, 32.75, 35.28] GB/s
+>> Min [3.61, 31.80, 31.41, 20.08, 32.76, 33.18, 35.56, 34.47, 32.74, 35.28] GB/s
+2026-08-24 17:58:28.573 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EP
+2026-08-24 17:58:30.114 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EP] (10 tries):
+>> Avg [3.82, 31.04, 33.99, 32.84, 34.45, 33.67, 30.56, 32.01, 10.41, 31.34] GB/s
+>> Min [3.82, 31.04, 33.98, 32.83, 34.44, 33.67, 30.56, 32.01, 10.40, 31.33] GB/s
+2026-08-24 17:58:30.114 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group ETP
+2026-08-24 17:58:30.814 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [ETP] (10 tries):
+>> Avg [6.92, 163.51, 199.58, 192.62, 147.62, 187.47, 174.06, 165.25, 181.54, 217.28] GB/s
+>> Min [6.92, 163.31, 199.41, 192.41, 147.35, 187.39, 174.01, 165.13, 181.28, 217.02] GB/s
+2026-08-24 17:58:30.815 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EETP
+2026-08-24 17:58:31.776 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EETP] (10 tries):
+>> Avg [32.23, 29.06, 29.48, 33.22, 33.19, 34.97, 30.85, 31.85, 33.30, 33.23] GB/s
+>> Min [32.22, 29.06, 29.47, 33.21, 33.18, 34.96, 30.85, 31.85, 33.29, 33.23] GB/s
+2026-08-24 17:58:31.776 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EDP
+2026-08-24 17:58:32.214 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EDP] (10 tries):
+>> Avg [180.68, 208.08, 210.77, 185.89, 209.55, 178.27, 174.37, 185.44, 172.58, 168.14] GB/s
+>> Min [180.59, 207.91, 210.64, 185.75, 209.46, 178.14, 174.24, 185.31, 172.45, 168.02] GB/s
+2026-08-24 17:58:32.214 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EMP
+2026-08-24 17:58:33.872 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EMP] (10 tries):
+>> Avg [3.50, 25.93, 26.72, 25.41, 26.02, 26.63, 26.54, 25.90, 18.77, 24.47] GB/s
+>> Min [3.50, 25.92, 26.71, 25.40, 26.02, 26.63, 26.54, 25.90, 18.77, 24.47] GB/s
+2026-08-24 17:58:33.919 | INFO     | steptronoss.checkpointing.local_checkpoint:load_ckpt:249 - Loading safetensors from /data/plms/stepfun-ai/Step-3.7-Flash, pt weight will be skipped.
+2026-08-24 17:58:33.924 | INFO     | steptronoss.model.decoder_model:__init__:202 - {
+  pp0/vp0: {
+    0-22: {recompute: True}
+  }
+  pp1/vp0: {
+    23-44: {recompute: True}
+  }
+}
+2026-08-24 17:58:34.070 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:34.286 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:34.511 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:34.903 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:35.139 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:35.366 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:35.733 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:35.961 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:36.186 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:36.556 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:36.774 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:37.004 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:37.373 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:37.592 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:37.818 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:38.186 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:38.401 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 17:58:49.498 | INFO     | steptronoss.model.utils.utils:load_model_checkpoint:59 - <All keys matched successfully>
+2026-08-24 17:58:49.524 | INFO     | steptronoss.optimizer.utils:advanced_get_param_groups:67 - Optim group 0 -> # params: 7.516M; wd_mult: 1.0; lr_mult: 1.0
+2026-08-24 17:58:49.530 | INFO     | steptronoss.optimizer.base_gradient_manager:__init__:91 - Gradbuffer: ParamBucketKey(dtype=torch.bfloat16, allreduce_group='DP', signature='MUON:False'), dp_world_size: 2
+2026-08-24 17:58:51.781 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:488 - Sync point [ after dataloaders are built ]
+2026-08-24 17:58:52.258 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:488 - Sync point [ before the start of training step ]
+2026-08-24 18:04:38.906 | INFO     | steptronoss.utils.optimizable:set_optimization:103 - Optimization set: 
+steptronoss.model.ep_dispatcher.token_dispatcher.TokenDispatcher -> alltoall
+steptronoss.model.common.attention_core.AttentionCore -> flash-attn
+steptronoss.model.utils.moe_utils.routed_grouped_ffn -> fused
+steptronoss.model.utils.moe_utils.moe_weighted_gather -> triton
+steptronoss.model.utils.moe_utils.grouped_gemm -> nv_grouped_gemm
+2026-08-24 18:04:42.236 | INFO     | steptronoss.initialize:set_mpu_random_seed:57 - > setting random seeds to 1234 ...
+2026-08-24 18:04:42.249 | INFO     | steptronoss.core.trainers.lm_trainer:before_train:78 - Printing training log to: [31]
+2026-08-24 18:04:43.519 | INFO     | steptronoss.utils.utils:profile_allreduce:390 - Profiling AllReduce... NCCL ENVs:
+2026-08-24 18:04:43.520 | INFO     | steptronoss.utils.utils:profile_allreduce:393 - NCCL_DEBUG = INFO
+2026-08-24 18:04:43.520 | INFO     | steptronoss.utils.utils:profile_allreduce:393 - NCCL_DEBUG_SUBSYS = INIT,NET,COLL
+2026-08-24 18:04:44.764 | INFO     | steptronoss.utils.utils:profile_allreduce:403 - Global allreduce (10 tries):
+>> [7.15, 37.79, 37.83, 40.13, 39.14, 38.98, 40.85, 40.43, 39.32, 39.67] GB/s
+2026-08-24 18:04:44.764 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group TP
+2026-08-24 18:04:46.497 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [TP] (10 tries):
+>> Avg [1.69, 84.80, 94.24, 99.97, 89.28, 91.54, 77.43, 89.06, 81.78, 96.03] GB/s
+>> Min [1.69, 84.79, 94.21, 99.90, 89.25, 91.51, 77.41, 89.04, 81.66, 95.97] GB/s
+2026-08-24 18:04:46.498 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group PP
+2026-08-24 18:04:48.701 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [PP] (10 tries):
+>> Avg [6.98, 11.55, 11.43, 11.28, 11.35, 10.14, 11.22, 11.49, 11.41, 11.47] GB/s
+>> Min [6.98, 11.55, 11.43, 11.28, 11.35, 10.05, 11.22, 11.49, 11.41, 11.47] GB/s
+2026-08-24 18:04:48.702 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group DP
+2026-08-24 18:04:50.890 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [DP] (10 tries):
+>> Avg [6.87, 11.30, 11.26, 11.52, 11.31, 11.37, 11.04, 11.41, 11.53, 11.55] GB/s
+>> Min [6.87, 11.30, 11.26, 11.52, 11.31, 11.37, 11.04, 11.40, 11.53, 11.55] GB/s
+2026-08-24 18:04:50.890 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group CP
+2026-08-24 18:04:52.972 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [CP] (10 tries):
+>> Avg [11.37, 11.49, 11.14, 11.31, 11.59, 11.55, 11.57, 10.66, 11.47, 11.41] GB/s
+>> Min [11.37, 11.49, 11.14, 11.31, 11.59, 11.55, 11.57, 10.66, 11.47, 11.41] GB/s
+2026-08-24 18:04:52.973 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group MP
+2026-08-24 18:04:54.370 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [MP] (10 tries):
+>> Avg [4.21, 31.87, 29.29, 30.94, 32.38, 33.57, 30.38, 30.62, 31.56, 32.32] GB/s
+>> Min [4.21, 31.87, 29.28, 30.93, 32.38, 33.56, 30.38, 30.62, 31.56, 32.31] GB/s
+2026-08-24 18:04:54.370 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EP
+2026-08-24 18:04:55.960 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EP] (10 tries):
+>> Avg [4.28, 28.76, 30.54, 32.05, 32.68, 32.69, 30.28, 31.66, 32.75, 29.69] GB/s
+>> Min [4.28, 28.75, 30.53, 32.04, 32.67, 32.69, 30.28, 31.65, 32.75, 29.69] GB/s
+2026-08-24 18:04:55.961 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group ETP
+2026-08-24 18:04:56.764 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [ETP] (10 tries):
+>> Avg [6.70, 132.85, 125.63, 162.89, 173.01, 212.00, 233.49, 215.29, 163.48, 199.14] GB/s
+>> Min [6.70, 132.80, 125.51, 162.82, 172.90, 211.86, 233.23, 215.16, 163.39, 199.02] GB/s
+2026-08-24 18:04:56.765 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EETP
+2026-08-24 18:04:57.754 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EETP] (10 tries):
+>> Avg [29.39, 14.65, 32.35, 33.01, 34.73, 34.88, 34.66, 34.28, 32.07, 31.61] GB/s
+>> Min [29.38, 14.65, 32.34, 33.01, 34.73, 34.87, 34.66, 34.27, 32.06, 31.60] GB/s
+2026-08-24 18:04:57.754 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EDP
+2026-08-24 18:04:58.168 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EDP] (10 tries):
+>> Avg [203.88, 178.04, 235.04, 201.63, 213.50, 165.07, 191.78, 196.70, 168.01, 172.08] GB/s
+>> Min [203.64, 177.97, 234.96, 201.36, 213.35, 165.04, 191.54, 196.57, 167.77, 171.57] GB/s
+2026-08-24 18:04:58.168 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EMP
+2026-08-24 18:04:59.741 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EMP] (10 tries):
+>> Avg [3.87, 29.50, 26.84, 26.49, 27.85, 25.23, 16.83, 26.42, 28.09, 27.20] GB/s
+>> Min [3.87, 29.50, 26.83, 26.48, 27.84, 25.23, 16.83, 26.40, 28.08, 27.20] GB/s
+2026-08-24 18:04:59.790 | INFO     | steptronoss.checkpointing.local_checkpoint:load_ckpt:249 - Loading safetensors from /data/plms/stepfun-ai/Step-3.7-Flash, pt weight will be skipped.
+2026-08-24 18:04:59.794 | INFO     | steptronoss.model.decoder_model:__init__:202 - {
+  pp0/vp0: {
+    0-22: {recompute: True}
+  }
+  pp1/vp0: {
+    23-44: {recompute: True}
+  }
+}
+2026-08-24 18:04:59.927 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:00.120 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:00.311 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:00.640 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:00.837 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:01.037 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:01.381 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:01.579 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:01.775 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:02.120 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:02.332 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:02.538 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:02.868 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:03.066 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:03.265 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:03.595 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:03.798 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 18:05:13.901 | INFO     | steptronoss.model.utils.utils:load_model_checkpoint:59 - <All keys matched successfully>
+2026-08-24 18:05:13.932 | INFO     | steptronoss.optimizer.utils:advanced_get_param_groups:67 - Optim group 0 -> # params: 7.516M; wd_mult: 1.0; lr_mult: 1.0
+2026-08-24 18:05:13.938 | INFO     | steptronoss.optimizer.base_gradient_manager:__init__:91 - Gradbuffer: ParamBucketKey(dtype=torch.bfloat16, allreduce_group='DP', signature='MUON:False'), dp_world_size: 2
+2026-08-24 18:05:16.601 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:488 - Sync point [ after dataloaders are built ]
+2026-08-24 18:05:17.084 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:488 - Sync point [ before the start of training step ]
+2026-08-24 20:46:45.990 | INFO     | steptronoss.utils.optimizable:set_optimization:103 - Optimization set: 
+steptronoss.model.ep_dispatcher.token_dispatcher.TokenDispatcher -> alltoall
+steptronoss.model.common.attention_core.AttentionCore -> flash-attn
+steptronoss.model.utils.moe_utils.routed_grouped_ffn -> fused
+steptronoss.model.utils.moe_utils.moe_weighted_gather -> triton
+steptronoss.model.utils.moe_utils.grouped_gemm -> nv_grouped_gemm
+2026-08-24 20:46:48.053 | INFO     | steptronoss.initialize:set_mpu_random_seed:57 - > setting random seeds to 1234 ...
+2026-08-24 20:46:48.059 | INFO     | steptronoss.core.trainers.lm_trainer:before_train:78 - Printing training log to: [31]
+2026-08-24 20:46:49.324 | INFO     | steptronoss.utils.utils:profile_allreduce:390 - Profiling AllReduce... NCCL ENVs:
+2026-08-24 20:46:49.324 | INFO     | steptronoss.utils.utils:profile_allreduce:393 - NCCL_DEBUG = INFO
+2026-08-24 20:46:49.324 | INFO     | steptronoss.utils.utils:profile_allreduce:393 - NCCL_DEBUG_SUBSYS = INIT,NET,COLL
+2026-08-24 20:46:51.310 | INFO     | steptronoss.utils.utils:profile_allreduce:403 - Global allreduce (10 tries):
+>> [6.65, 36.99, 37.85, 37.01, 38.61, 39.40, 41.14, 39.71, 39.58, 37.92] GB/s
+2026-08-24 20:46:51.310 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group TP
+2026-08-24 20:46:53.005 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [TP] (10 tries):
+>> Avg [1.88, 86.40, 88.58, 80.59, 85.81, 87.58, 87.03, 95.40, 74.37, 22.68] GB/s
+>> Min [1.88, 86.37, 88.55, 80.57, 85.77, 87.53, 86.97, 95.37, 74.33, 22.67] GB/s
+2026-08-24 20:46:53.005 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group PP
+2026-08-24 20:46:55.196 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [PP] (10 tries):
+>> Avg [7.19, 11.56, 11.33, 11.45, 11.25, 11.45, 11.40, 11.32, 11.44, 11.15] GB/s
+>> Min [7.19, 11.55, 11.33, 11.45, 11.25, 11.45, 11.40, 11.32, 11.44, 11.15] GB/s
+2026-08-24 20:46:55.196 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group DP
+2026-08-24 20:46:57.628 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [DP] (10 tries):
+>> Avg [7.16, 11.16, 11.39, 11.35, 11.18, 5.22, 11.28, 11.38, 11.37, 11.46] GB/s
+>> Min [7.16, 11.16, 11.39, 11.35, 11.18, 5.21, 11.28, 11.38, 11.32, 11.46] GB/s
+2026-08-24 20:46:57.628 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group CP
+2026-08-24 20:46:59.717 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [CP] (10 tries):
+>> Avg [11.48, 11.31, 11.34, 11.35, 11.44, 11.30, 11.38, 11.38, 11.34, 11.18] GB/s
+>> Min [11.48, 11.30, 11.34, 11.35, 11.44, 11.30, 11.38, 11.38, 11.34, 11.18] GB/s
+2026-08-24 20:46:59.717 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group MP
+2026-08-24 20:47:01.117 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [MP] (10 tries):
+>> Avg [3.90, 29.77, 32.85, 31.67, 33.82, 33.11, 34.50, 33.71, 33.50, 33.62] GB/s
+>> Min [3.90, 29.75, 32.84, 31.67, 33.82, 33.10, 34.50, 33.69, 33.50, 33.62] GB/s
+2026-08-24 20:47:01.117 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EP
+2026-08-24 20:47:02.594 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EP] (10 tries):
+>> Avg [4.10, 13.58, 29.78, 29.93, 33.29, 32.94, 32.76, 32.09, 34.90, 32.90] GB/s
+>> Min [4.10, 13.58, 29.77, 29.92, 33.28, 32.93, 32.75, 32.08, 34.90, 32.89] GB/s
+2026-08-24 20:47:02.594 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group ETP
+2026-08-24 20:47:03.428 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [ETP] (10 tries):
+>> Avg [6.73, 154.19, 162.35, 197.82, 212.62, 22.28, 120.89, 201.05, 171.35, 199.35] GB/s
+>> Min [6.73, 154.02, 162.26, 197.55, 212.52, 22.28, 120.85, 200.78, 171.21, 199.17] GB/s
+2026-08-24 20:47:03.428 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EETP
+2026-08-24 20:47:04.404 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EETP] (10 tries):
+>> Avg [31.70, 30.52, 30.08, 30.57, 32.31, 31.70, 32.58, 33.60, 34.25, 34.54] GB/s
+>> Min [31.70, 30.52, 30.07, 30.57, 32.30, 31.69, 32.57, 33.59, 34.24, 34.53] GB/s
+2026-08-24 20:47:04.404 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EDP
+2026-08-24 20:47:04.946 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EDP] (10 tries):
+>> Avg [23.12, 211.51, 168.23, 189.36, 134.74, 158.59, 234.04, 188.53, 130.81, 132.74] GB/s
+>> Min [23.11, 211.27, 168.10, 188.81, 134.67, 150.86, 233.80, 188.41, 130.44, 132.32] GB/s
+2026-08-24 20:47:04.946 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EMP
+2026-08-24 20:47:06.476 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EMP] (10 tries):
+>> Avg [3.83, 27.18, 27.24, 28.02, 29.46, 28.42, 26.77, 27.36, 25.72, 26.72] GB/s
+>> Min [3.83, 27.18, 27.24, 28.01, 29.45, 28.42, 26.75, 27.35, 25.72, 26.71] GB/s
+2026-08-24 20:47:06.568 | INFO     | steptronoss.checkpointing.local_checkpoint:load_ckpt:249 - Loading safetensors from /data/plms/stepfun-ai/Step-3.7-Flash, pt weight will be skipped.
+2026-08-24 20:47:06.573 | INFO     | steptronoss.model.decoder_model:__init__:202 - {
+  pp0/vp0: {
+    0-22: {recompute: True}
+  }
+  pp1/vp0: {
+    23-44: {recompute: True}
+  }
+}
+2026-08-24 20:47:06.712 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:06.923 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:07.138 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:07.498 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:07.713 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:07.926 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:08.258 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:08.451 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:08.645 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:08.984 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:09.178 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:09.385 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:09.726 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:09.927 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:10.130 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:10.468 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:10.665 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:47:21.742 | INFO     | steptronoss.model.utils.utils:load_model_checkpoint:59 - <All keys matched successfully>
+2026-08-24 20:47:21.766 | INFO     | steptronoss.optimizer.utils:advanced_get_param_groups:67 - Optim group 0 -> # params: 7.516M; wd_mult: 1.0; lr_mult: 1.0
+2026-08-24 20:47:21.772 | INFO     | steptronoss.optimizer.base_gradient_manager:__init__:91 - Gradbuffer: ParamBucketKey(dtype=torch.bfloat16, allreduce_group='DP', signature='MUON:False'), dp_world_size: 2
+2026-08-24 20:47:24.142 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ after dataloaders are built ]
+2026-08-24 20:47:24.635 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ before the start of training step ]
+2026-08-24 20:49:14.673 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        0/     100 | cum-tokens: 81.92K | ms/iter: 106138.8 | tokens-per-second-per-card: 24.1 | lr: 9.999E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.007
+2026-08-24 20:51:23.096 | INFO     | steptronoss.utils.optimizable:set_optimization:103 - Optimization set: 
+steptronoss.model.ep_dispatcher.token_dispatcher.TokenDispatcher -> alltoall
+steptronoss.model.common.attention_core.AttentionCore -> flash-attn
+steptronoss.model.utils.moe_utils.routed_grouped_ffn -> fused
+steptronoss.model.utils.moe_utils.moe_weighted_gather -> triton
+steptronoss.model.utils.moe_utils.grouped_gemm -> nv_grouped_gemm
+2026-08-24 20:51:25.827 | INFO     | steptronoss.initialize:set_mpu_random_seed:57 - > setting random seeds to 1234 ...
+2026-08-24 20:51:25.834 | INFO     | steptronoss.core.trainers.lm_trainer:before_train:78 - Printing training log to: [31]
+2026-08-24 20:51:27.091 | INFO     | steptronoss.utils.utils:profile_allreduce:390 - Profiling AllReduce... NCCL ENVs:
+2026-08-24 20:51:27.092 | INFO     | steptronoss.utils.utils:profile_allreduce:393 - NCCL_DEBUG = INFO
+2026-08-24 20:51:27.092 | INFO     | steptronoss.utils.utils:profile_allreduce:393 - NCCL_DEBUG_SUBSYS = INIT,NET,COLL
+2026-08-24 20:51:29.077 | INFO     | steptronoss.utils.utils:profile_allreduce:403 - Global allreduce (10 tries):
+>> [10.42, 41.65, 41.17, 41.29, 38.62, 39.89, 39.04, 40.33, 39.30, 41.32] GB/s
+2026-08-24 20:51:29.077 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group TP
+2026-08-24 20:51:30.806 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [TP] (10 tries):
+>> Avg [1.71, 77.79, 89.38, 95.74, 95.81, 97.56, 97.62, 74.53, 75.06, 82.27] GB/s
+>> Min [1.71, 77.60, 89.28, 95.70, 95.72, 97.51, 97.54, 74.44, 75.04, 82.20] GB/s
+2026-08-24 20:51:30.806 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group PP
+2026-08-24 20:51:33.035 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [PP] (10 tries):
+>> Avg [6.42, 11.22, 11.15, 11.47, 11.37, 11.33, 11.15, 11.53, 11.41, 11.49] GB/s
+>> Min [6.42, 11.21, 11.14, 11.47, 11.37, 11.33, 11.15, 11.53, 11.41, 11.49] GB/s
+2026-08-24 20:51:33.035 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group DP
+2026-08-24 20:51:35.359 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [DP] (10 tries):
+>> Avg [6.77, 11.27, 11.38, 10.98, 11.30, 11.31, 11.39, 11.37, 11.39, 11.42] GB/s
+>> Min [6.77, 11.27, 11.38, 10.98, 11.30, 11.31, 11.39, 11.37, 11.39, 11.42] GB/s
+2026-08-24 20:51:35.360 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group CP
+2026-08-24 20:51:37.450 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [CP] (10 tries):
+>> Avg [11.52, 11.52, 11.37, 11.41, 11.58, 11.14, 11.22, 11.42, 11.35, 11.12] GB/s
+>> Min [11.52, 11.52, 11.37, 11.40, 11.58, 11.14, 11.22, 11.42, 11.35, 11.12] GB/s
+2026-08-24 20:51:37.450 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group MP
+2026-08-24 20:51:38.848 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [MP] (10 tries):
+>> Avg [3.94, 32.21, 31.89, 30.92, 30.99, 33.95, 32.49, 34.19, 33.68, 35.29] GB/s
+>> Min [3.94, 32.20, 31.89, 30.91, 30.99, 33.94, 32.49, 34.18, 33.67, 35.28] GB/s
+2026-08-24 20:51:38.848 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EP
+2026-08-24 20:51:40.307 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EP] (10 tries):
+>> Avg [3.97, 34.30, 33.65, 29.75, 28.69, 31.20, 30.83, 31.87, 28.65, 30.83] GB/s
+>> Min [3.97, 34.30, 33.64, 29.75, 28.69, 31.20, 30.82, 31.87, 28.64, 30.82] GB/s
+2026-08-24 20:51:40.307 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group ETP
+2026-08-24 20:51:41.153 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [ETP] (10 tries):
+>> Avg [6.85, 145.41, 164.43, 137.68, 139.30, 160.26, 23.22, 172.03, 162.44, 194.84] GB/s
+>> Min [6.85, 145.32, 164.31, 137.59, 139.23, 160.09, 23.22, 171.94, 162.35, 194.56] GB/s
+2026-08-24 20:51:41.153 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EETP
+2026-08-24 20:51:42.115 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EETP] (10 tries):
+>> Avg [31.99, 29.19, 32.25, 34.49, 33.28, 33.93, 33.16, 32.79, 33.38, 32.17] GB/s
+>> Min [31.99, 29.18, 32.24, 34.49, 33.27, 33.92, 33.15, 32.77, 33.37, 32.17] GB/s
+2026-08-24 20:51:42.115 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EDP
+2026-08-24 20:51:42.634 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EDP] (10 tries):
+>> Avg [207.75, 198.00, 191.91, 203.07, 161.77, 159.58, 147.69, 196.43, 140.04, 133.53] GB/s
+>> Min [207.38, 197.88, 191.69, 202.90, 161.68, 158.50, 147.20, 195.91, 139.93, 133.32] GB/s
+2026-08-24 20:51:42.634 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EMP
+2026-08-24 20:51:44.233 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EMP] (10 tries):
+>> Avg [3.92, 26.72, 25.47, 25.55, 24.20, 24.22, 24.75, 25.18, 26.64, 25.77] GB/s
+>> Min [3.92, 26.72, 25.47, 25.55, 24.19, 24.22, 24.75, 25.18, 26.64, 25.77] GB/s
+2026-08-24 20:51:44.282 | INFO     | steptronoss.checkpointing.local_checkpoint:load_ckpt:249 - Loading safetensors from /data/plms/stepfun-ai/Step-3.7-Flash, pt weight will be skipped.
+2026-08-24 20:51:44.286 | INFO     | steptronoss.model.decoder_model:__init__:202 - {
+  pp0/vp0: {
+    0-22: {recompute: True}
+  }
+  pp1/vp0: {
+    23-44: {recompute: True}
+  }
+}
+2026-08-24 20:51:44.421 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:44.621 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:44.822 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:45.161 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:45.363 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:45.568 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:45.905 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:46.105 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:46.304 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:46.644 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:46.845 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:47.044 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:47.379 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:47.577 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:47.773 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:48.108 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:48.305 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:51:59.384 | INFO     | steptronoss.model.utils.utils:load_model_checkpoint:59 - <All keys matched successfully>
+2026-08-24 20:51:59.410 | INFO     | steptronoss.optimizer.utils:advanced_get_param_groups:67 - Optim group 0 -> # params: 7.516M; wd_mult: 1.0; lr_mult: 1.0
+2026-08-24 20:51:59.415 | INFO     | steptronoss.optimizer.base_gradient_manager:__init__:91 - Gradbuffer: ParamBucketKey(dtype=torch.bfloat16, allreduce_group='DP', signature='MUON:False'), dp_world_size: 2
+2026-08-24 20:52:01.646 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ after dataloaders are built ]
+2026-08-24 20:52:02.143 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ before the start of training step ]
+2026-08-24 20:53:58.251 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        0/     100 | cum-tokens: 81.92K | ms/iter: 112182.3 | tokens-per-second-per-card: 22.8 | lr: 9.999E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.131
+2026-08-24 20:55:20.332 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        1/     100 | cum-tokens: 163.84K | ms/iter: 82301.8 | tokens-per-second-per-card: 31.1 | lr: 9.995E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.851
+2026-08-24 20:56:40.792 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        2/     100 | cum-tokens: 245.76K | ms/iter: 80295.2 | tokens-per-second-per-card: 31.9 | lr: 9.989E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 2.190
+2026-08-24 20:58:46.390 | INFO     | steptronoss.utils.optimizable:set_optimization:103 - Optimization set: 
+steptronoss.model.ep_dispatcher.token_dispatcher.TokenDispatcher -> alltoall
+steptronoss.model.common.attention_core.AttentionCore -> flash-attn
+steptronoss.model.utils.moe_utils.routed_grouped_ffn -> fused
+steptronoss.model.utils.moe_utils.moe_weighted_gather -> triton
+steptronoss.model.utils.moe_utils.grouped_gemm -> nv_grouped_gemm
+2026-08-24 20:58:50.531 | INFO     | steptronoss.initialize:set_mpu_random_seed:57 - > setting random seeds to 1234 ...
+2026-08-24 20:58:50.538 | INFO     | steptronoss.core.trainers.lm_trainer:before_train:78 - Printing training log to: [31]
+2026-08-24 20:58:51.815 | INFO     | steptronoss.utils.utils:profile_allreduce:390 - Profiling AllReduce... NCCL ENVs:
+2026-08-24 20:58:52.947 | INFO     | steptronoss.utils.utils:profile_allreduce:403 - Global allreduce (10 tries):
+>> [10.21, 40.96, 38.11, 38.55, 37.92, 40.76, 38.45, 38.70, 38.77, 37.31] GB/s
+2026-08-24 20:58:52.948 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group TP
+2026-08-24 20:58:54.750 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [TP] (10 tries):
+>> Avg [1.63, 91.61, 89.76, 83.68, 79.97, 73.84, 89.53, 79.41, 93.01, 67.65] GB/s
+>> Min [1.63, 91.54, 89.70, 83.63, 79.95, 73.82, 89.45, 79.26, 92.98, 67.57] GB/s
+2026-08-24 20:58:54.750 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group PP
+2026-08-24 20:58:56.975 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [PP] (10 tries):
+>> Avg [7.48, 11.39, 11.38, 11.30, 11.32, 11.31, 11.39, 11.41, 11.25, 11.13] GB/s
+>> Min [7.48, 11.39, 11.37, 11.30, 11.32, 11.31, 11.39, 11.41, 11.25, 11.13] GB/s
+2026-08-24 20:58:56.975 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group DP
+2026-08-24 20:58:59.267 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [DP] (10 tries):
+>> Avg [6.66, 11.22, 11.48, 11.42, 11.41, 11.47, 11.37, 11.42, 11.19, 11.36] GB/s
+>> Min [6.66, 11.22, 11.48, 11.42, 11.40, 11.47, 11.37, 11.42, 11.19, 11.36] GB/s
+2026-08-24 20:58:59.267 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group CP
+2026-08-24 20:59:01.515 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [CP] (10 tries):
+>> Avg [11.38, 11.35, 11.32, 11.28, 11.42, 11.28, 11.40, 6.09, 11.26, 11.24] GB/s
+>> Min [11.38, 11.35, 11.32, 11.28, 11.42, 11.28, 11.40, 6.09, 11.25, 11.24] GB/s
+2026-08-24 20:59:01.516 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group MP
+2026-08-24 20:59:02.931 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [MP] (10 tries):
+>> Avg [3.92, 31.48, 32.11, 32.87, 33.29, 31.95, 31.96, 31.93, 30.19, 32.38] GB/s
+>> Min [3.92, 31.48, 32.10, 32.87, 33.28, 31.94, 31.91, 31.91, 30.18, 32.36] GB/s
+2026-08-24 20:59:02.931 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EP
+2026-08-24 20:59:04.371 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EP] (10 tries):
+>> Avg [3.79, 32.24, 31.28, 30.20, 31.15, 31.68, 32.65, 32.29, 30.87, 32.14] GB/s
+>> Min [3.78, 32.23, 31.27, 30.19, 31.15, 31.68, 32.64, 32.28, 30.87, 32.13] GB/s
+2026-08-24 20:59:04.371 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group ETP
+2026-08-24 20:59:05.138 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [ETP] (10 tries):
+>> Avg [6.45, 135.12, 150.56, 181.93, 184.15, 168.42, 164.29, 181.55, 186.54, 161.38] GB/s
+>> Min [6.45, 135.01, 150.00, 181.73, 184.04, 168.15, 162.01, 181.40, 186.17, 161.20] GB/s
+2026-08-24 20:59:05.139 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EETP
+2026-08-24 20:59:06.189 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EETP] (10 tries):
+>> Avg [31.44, 31.48, 30.21, 30.14, 32.80, 30.66, 31.67, 30.86, 32.95, 32.12] GB/s
+>> Min [31.43, 31.47, 30.21, 30.13, 32.79, 30.66, 31.67, 30.86, 32.94, 32.11] GB/s
+2026-08-24 20:59:06.189 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EDP
+2026-08-24 20:59:06.647 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EDP] (10 tries):
+>> Avg [151.22, 169.08, 171.25, 158.95, 183.59, 190.75, 197.73, 155.83, 165.68, 191.17] GB/s
+>> Min [151.11, 168.96, 171.13, 158.81, 183.55, 190.52, 197.54, 155.67, 165.30, 190.91] GB/s
+2026-08-24 20:59:06.647 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EMP
+2026-08-24 20:59:08.246 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EMP] (10 tries):
+>> Avg [3.97, 26.03, 26.76, 24.93, 24.93, 26.69, 26.36, 16.29, 25.34, 24.98] GB/s
+>> Min [3.97, 26.02, 26.75, 24.93, 24.92, 26.68, 26.35, 16.29, 25.34, 24.98] GB/s
+2026-08-24 20:59:08.297 | INFO     | steptronoss.checkpointing.local_checkpoint:load_ckpt:249 - Loading safetensors from /data/plms/stepfun-ai/Step-3.7-Flash, pt weight will be skipped.
+2026-08-24 20:59:08.302 | INFO     | steptronoss.model.decoder_model:__init__:202 - {
+  pp0/vp0: {
+    0-22: {recompute: True}
+  }
+  pp1/vp0: {
+    23-44: {recompute: True}
+  }
+}
+2026-08-24 20:59:08.443 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:08.646 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:08.878 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:09.274 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:09.473 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:09.670 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:09.997 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:10.192 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:10.387 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:10.720 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:10.916 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:11.111 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:11.442 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:11.643 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:11.846 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:12.171 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:12.374 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 20:59:24.831 | INFO     | steptronoss.model.utils.utils:load_model_checkpoint:59 - <All keys matched successfully>
+2026-08-24 20:59:24.858 | INFO     | steptronoss.optimizer.utils:advanced_get_param_groups:67 - Optim group 0 -> # params: 7.516M; wd_mult: 1.0; lr_mult: 1.0
+2026-08-24 20:59:24.863 | INFO     | steptronoss.optimizer.base_gradient_manager:__init__:91 - Gradbuffer: ParamBucketKey(dtype=torch.bfloat16, allreduce_group='DP', signature='MUON:False'), dp_world_size: 2
+2026-08-24 20:59:25.674 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ after dataloaders are built ]
+2026-08-24 20:59:26.154 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ before the start of training step ]
+2026-08-24 21:01:19.055 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        0/     100 | cum-tokens: 81.92K | ms/iter: 109042.3 | tokens-per-second-per-card: 23.5 | lr: 9.999E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.134
+2026-08-24 21:02:43.184 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        1/     100 | cum-tokens: 163.84K | ms/iter: 84174.3 | tokens-per-second-per-card: 30.4 | lr: 9.995E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.929
+2026-08-24 21:04:03.939 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        2/     100 | cum-tokens: 245.76K | ms/iter: 80744.0 | tokens-per-second-per-card: 31.7 | lr: 9.989E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 1.975
+2026-08-24 21:05:24.296 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        3/     100 | cum-tokens: 327.68K | ms/iter: 80462.3 | tokens-per-second-per-card: 31.8 | lr: 9.980E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.781
+2026-08-24 21:06:43.389 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        4/     100 | cum-tokens: 409.6K | ms/iter: 78952.8 | tokens-per-second-per-card: 32.4 | lr: 9.969E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.271
+2026-08-24 21:08:02.326 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        5/     100 | cum-tokens: 491.52K | ms/iter: 79013.1 | tokens-per-second-per-card: 32.4 | lr: 9.956E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.735
+2026-08-24 21:09:22.343 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        6/     100 | cum-tokens: 573.44K | ms/iter: 80003.8 | tokens-per-second-per-card: 32.0 | lr: 9.940E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.685
+2026-08-24 21:10:42.468 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        7/     100 | cum-tokens: 655.36K | ms/iter: 79871.1 | tokens-per-second-per-card: 32.1 | lr: 9.921E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.426
+2026-08-24 21:12:01.124 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        8/     100 | cum-tokens: 737.28K | ms/iter: 78799.9 | tokens-per-second-per-card: 32.5 | lr: 9.901E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.361
+2026-08-24 21:13:20.136 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        9/     100 | cum-tokens: 819.2K | ms/iter: 79271.8 | tokens-per-second-per-card: 32.3 | lr: 9.878E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.222
+2026-08-24 21:14:39.582 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:       10/     100 | cum-tokens: 901.12K | ms/iter: 78531.5 | tokens-per-second-per-card: 32.6 | lr: 9.852E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.091
+2026-08-24 21:14:39.624 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ ready for dump ]
+2026-08-24 21:14:55.000 | WARNING  | steptronoss.checkpointing.reshape_ops:backward:173 - VocabPad(target_vocab_size=128896, dim=0, pad_type=last, actual_vocab_size=None) is a one-way conversion (safetensors->pt only), original vocab_size of saftensors cannot be restored!
+2026-08-24 22:48:13.032 | INFO     | steptronoss.utils.optimizable:set_optimization:103 - Optimization set: 
+steptronoss.model.ep_dispatcher.token_dispatcher.TokenDispatcher -> alltoall
+steptronoss.model.common.attention_core.AttentionCore -> flash-attn
+steptronoss.model.utils.moe_utils.routed_grouped_ffn -> fused
+steptronoss.model.utils.moe_utils.moe_weighted_gather -> triton
+steptronoss.model.utils.moe_utils.grouped_gemm -> nv_grouped_gemm
+2026-08-24 22:48:15.759 | INFO     | steptronoss.initialize:set_mpu_random_seed:57 - > setting random seeds to 1234 ...
+2026-08-24 22:48:15.769 | INFO     | steptronoss.core.trainers.lm_trainer:before_train:78 - Printing training log to: [31]
+2026-08-24 22:48:16.954 | INFO     | steptronoss.utils.utils:profile_allreduce:390 - Profiling AllReduce... NCCL ENVs:
+2026-08-24 22:48:18.994 | INFO     | steptronoss.utils.utils:profile_allreduce:403 - Global allreduce (10 tries):
+>> [11.73, 38.35, 38.28, 39.42, 38.58, 37.13, 39.28, 38.81, 39.47, 40.15] GB/s
+2026-08-24 22:48:18.994 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group TP
+2026-08-24 22:48:20.892 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [TP] (10 tries):
+>> Avg [1.75, 72.02, 82.84, 89.56, 24.66, 87.29, 76.41, 80.38, 89.32, 93.89] GB/s
+>> Min [1.75, 71.94, 82.80, 89.53, 24.64, 87.22, 76.37, 80.31, 89.17, 93.59] GB/s
+2026-08-24 22:48:20.893 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group PP
+2026-08-24 22:48:23.122 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [PP] (10 tries):
+>> Avg [6.82, 11.24, 10.14, 11.36, 11.41, 11.34, 11.49, 11.36, 10.91, 11.21] GB/s
+>> Min [6.82, 11.24, 10.14, 11.36, 11.41, 11.34, 11.48, 11.36, 10.91, 11.20] GB/s
+2026-08-24 22:48:23.122 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group DP
+2026-08-24 22:48:25.312 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [DP] (10 tries):
+>> Avg [7.19, 11.26, 11.50, 11.56, 11.49, 11.34, 11.26, 11.38, 11.33, 10.92] GB/s
+>> Min [7.19, 11.26, 11.50, 11.56, 11.49, 11.34, 11.26, 11.38, 11.32, 10.92] GB/s
+2026-08-24 22:48:25.312 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group CP
+2026-08-24 22:48:27.574 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [CP] (10 tries):
+>> Avg [11.47, 11.53, 11.44, 11.56, 11.50, 11.48, 11.52, 11.42, 11.47, 9.51] GB/s
+>> Min [11.47, 11.53, 11.44, 11.56, 11.50, 11.48, 11.52, 11.42, 11.47, 9.51] GB/s
+2026-08-24 22:48:27.574 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group MP
+2026-08-24 22:48:29.063 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [MP] (10 tries):
+>> Avg [3.91, 32.13, 34.35, 33.73, 33.55, 33.12, 33.82, 32.96, 33.04, 33.02] GB/s
+>> Min [3.91, 32.13, 34.34, 33.73, 33.55, 33.12, 33.82, 32.95, 33.02, 33.01] GB/s
+2026-08-24 22:48:29.063 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EP
+2026-08-24 22:48:30.427 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EP] (10 tries):
+>> Avg [3.90, 35.79, 35.36, 33.40, 31.75, 31.60, 32.11, 34.11, 33.88, 32.27] GB/s
+>> Min [3.90, 35.78, 35.36, 33.40, 31.73, 31.59, 32.10, 34.11, 33.87, 32.26] GB/s
+2026-08-24 22:48:30.427 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group ETP
+2026-08-24 22:48:31.127 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [ETP] (10 tries):
+>> Avg [6.68, 218.37, 178.58, 168.99, 158.21, 159.23, 235.45, 181.40, 233.10, 213.30] GB/s
+>> Min [6.68, 218.06, 178.49, 168.76, 158.09, 159.16, 234.97, 181.32, 232.96, 212.33] GB/s
+2026-08-24 22:48:31.128 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EETP
+2026-08-24 22:48:32.155 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EETP] (10 tries):
+>> Avg [32.21, 34.37, 32.53, 33.20, 32.80, 33.04, 31.91, 32.70, 31.91, 32.20] GB/s
+>> Min [32.20, 34.36, 32.53, 33.19, 32.80, 33.04, 31.90, 32.69, 31.91, 32.19] GB/s
+2026-08-24 22:48:32.155 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EDP
+2026-08-24 22:48:32.626 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EDP] (10 tries):
+>> Avg [219.00, 192.69, 171.93, 170.17, 208.03, 184.80, 125.50, 160.97, 212.48, 112.50] GB/s
+>> Min [218.82, 192.47, 171.89, 170.08, 207.74, 184.71, 125.21, 160.54, 211.91, 112.42] GB/s
+2026-08-24 22:48:32.627 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EMP
+2026-08-24 22:48:34.335 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EMP] (10 tries):
+>> Avg [2.97, 23.21, 26.62, 26.07, 27.42, 27.29, 27.13, 28.66, 24.88, 25.25] GB/s
+>> Min [2.97, 23.20, 26.62, 26.06, 27.41, 27.29, 27.13, 28.66, 24.88, 25.25] GB/s
+2026-08-24 22:49:01.373 | INFO     | steptronoss.checkpointing.local_checkpoint:load_ckpt:255 - Loading safetensors from /data/plms/stepfun-ai/Step-3.7-Flash, pt weight will be skipped.
+2026-08-24 22:49:01.380 | INFO     | steptronoss.model.decoder_model:__init__:202 - {
+  pp0/vp0: {
+    0-22: {recompute: True}
+  }
+  pp1/vp0: {
+    23-44: {recompute: True}
+  }
+}
+2026-08-24 22:49:01.856 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:02.049 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:02.241 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:02.565 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:02.757 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:02.948 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:03.275 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:03.465 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:03.654 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:03.978 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:04.168 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:04.367 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:04.683 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:04.871 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:05.066 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:05.387 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 22:49:05.582 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-24 23:06:55.155 | INFO     | steptronoss.model.utils.utils:load_model_checkpoint:59 - <All keys matched successfully>
+2026-08-24 23:06:55.616 | INFO     | steptronoss.optimizer.utils:advanced_get_param_groups:67 - Optim group 0 -> # params: 7.516M; wd_mult: 1.0; lr_mult: 1.0
+2026-08-24 23:06:55.689 | INFO     | steptronoss.optimizer.base_gradient_manager:__init__:91 - Gradbuffer: ParamBucketKey(dtype=torch.bfloat16, allreduce_group='DP', signature='MUON:False'), dp_world_size: 2
+2026-08-24 23:07:00.326 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ after dataloaders are built ]
+2026-08-24 23:07:01.369 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ before the start of training step ]
+2026-08-24 23:09:06.386 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        0/      20 | cum-tokens: 81.92K | ms/iter: 121666.2 | tokens-per-second-per-card: 21.0 | lr: 9.985E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.138
+2026-08-24 23:10:20.140 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        1/      20 | cum-tokens: 163.84K | ms/iter: 73746.4 | tokens-per-second-per-card: 34.7 | lr: 9.878E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.886
+2026-08-24 23:11:34.584 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        2/      20 | cum-tokens: 245.76K | ms/iter: 74321.2 | tokens-per-second-per-card: 34.4 | lr: 9.728E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 2.007
+2026-08-24 23:12:47.660 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        3/      20 | cum-tokens: 327.68K | ms/iter: 72961.4 | tokens-per-second-per-card: 35.1 | lr: 9.523E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.852
+2026-08-24 23:14:00.623 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        4/      20 | cum-tokens: 409.6K | ms/iter: 73119.4 | tokens-per-second-per-card: 35.0 | lr: 9.268E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.244
+2026-08-24 23:15:13.740 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        5/      20 | cum-tokens: 491.52K | ms/iter: 73049.1 | tokens-per-second-per-card: 35.0 | lr: 8.969E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.767
+2026-08-24 23:16:27.531 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        6/      20 | cum-tokens: 573.44K | ms/iter: 73864.8 | tokens-per-second-per-card: 34.7 | lr: 8.635E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.817
+2026-08-24 23:17:41.560 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        7/      20 | cum-tokens: 655.36K | ms/iter: 73896.8 | tokens-per-second-per-card: 34.6 | lr: 8.273E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.431
+2026-08-24 23:18:54.339 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        8/      20 | cum-tokens: 737.28K | ms/iter: 72868.9 | tokens-per-second-per-card: 35.1 | lr: 7.891E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.476
+2026-08-24 23:20:07.760 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        9/      20 | cum-tokens: 819.2K | ms/iter: 73441.2 | tokens-per-second-per-card: 34.9 | lr: 7.500E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.317
+2026-08-24 23:21:20.376 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:       10/      20 | cum-tokens: 901.12K | ms/iter: 72697.8 | tokens-per-second-per-card: 35.2 | lr: 7.109E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.097
+2026-08-24 23:21:20.422 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ ready for dump ]
+2026-08-24 23:21:21.260 | INFO     | steptronoss.checkpointing.local_checkpoint:size_stat:118 - TP03_PP000_DP000.pt: 12.3 G | TP03_PP000_DP000_OPT.pt: 0.0 G
+2026-08-24 23:21:22.005 | INFO     | steptronoss.checkpointing.local_checkpoint:_dump_with_callback:498 - <Uploader:3>: Started dumping to /data/projects/tangbo/SteptronOss/checkpoints/step3p7_flash_sft_step3_data_muon/lora/it10/TP03_PP000_DP000.pt
+2026-08-25 10:27:42.854 | INFO     | steptronoss.utils.optimizable:set_optimization:103 - Optimization set: 
+steptronoss.model.ep_dispatcher.token_dispatcher.TokenDispatcher -> alltoall
+steptronoss.model.common.attention_core.AttentionCore -> flash-attn
+steptronoss.model.utils.moe_utils.routed_grouped_ffn -> fused
+steptronoss.model.utils.moe_utils.moe_weighted_gather -> triton
+steptronoss.model.utils.moe_utils.grouped_gemm -> nv_grouped_gemm
+2026-08-25 10:27:49.390 | INFO     | steptronoss.initialize:set_mpu_random_seed:57 - > setting random seeds to 1234 ...
+2026-08-25 10:27:49.398 | INFO     | steptronoss.core.trainers.lm_trainer:before_train:78 - Printing training log to: [31]
+2026-08-25 10:27:50.600 | INFO     | steptronoss.utils.utils:profile_allreduce:390 - Profiling AllReduce... NCCL ENVs:
+2026-08-25 10:27:52.369 | INFO     | steptronoss.utils.utils:profile_allreduce:403 - Global allreduce (10 tries):
+>> [9.11, 39.84, 39.92, 38.73, 37.26, 36.12, 37.30, 38.93, 40.12, 39.87] GB/s
+2026-08-25 10:27:52.369 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group TP
+2026-08-25 10:27:54.103 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [TP] (10 tries):
+>> Avg [1.72, 90.78, 95.53, 86.38, 80.60, 81.16, 91.92, 88.89, 77.01, 80.32] GB/s
+>> Min [1.72, 90.76, 95.49, 86.31, 80.51, 81.11, 91.88, 88.87, 76.99, 80.20] GB/s
+2026-08-25 10:27:54.104 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group PP
+2026-08-25 10:27:56.513 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [PP] (10 tries):
+>> Avg [6.78, 11.42, 11.52, 10.16, 11.49, 11.49, 11.49, 5.25, 11.45, 11.38] GB/s
+>> Min [6.78, 11.42, 11.52, 10.16, 11.49, 11.49, 11.49, 5.25, 11.45, 11.38] GB/s
+2026-08-25 10:27:56.514 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group DP
+2026-08-25 10:27:58.817 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [DP] (10 tries):
+>> Avg [5.38, 11.40, 11.39, 11.13, 11.11, 11.37, 11.21, 11.53, 11.10, 11.29] GB/s
+>> Min [5.38, 11.40, 11.39, 11.13, 11.11, 11.37, 11.21, 11.53, 11.10, 11.29] GB/s
+2026-08-25 10:27:58.817 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group CP
+2026-08-25 10:28:00.924 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [CP] (10 tries):
+>> Avg [10.87, 11.44, 10.82, 10.29, 11.46, 11.50, 11.50, 11.53, 11.28, 11.36] GB/s
+>> Min [10.87, 11.44, 10.82, 10.29, 11.46, 11.50, 11.50, 11.53, 11.28, 11.36] GB/s
+2026-08-25 10:28:00.924 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group MP
+2026-08-25 10:28:02.285 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [MP] (10 tries):
+>> Avg [4.26, 32.48, 32.65, 33.06, 32.34, 31.73, 32.03, 33.28, 32.23, 34.23] GB/s
+>> Min [4.26, 32.47, 32.64, 33.05, 32.34, 31.72, 32.02, 33.27, 32.23, 34.22] GB/s
+2026-08-25 10:28:02.286 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EP
+2026-08-25 10:28:03.649 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EP] (10 tries):
+>> Avg [4.49, 33.34, 35.57, 34.24, 32.20, 17.53, 33.07, 33.01, 31.58, 33.06] GB/s
+>> Min [4.49, 33.34, 35.56, 34.23, 32.19, 17.53, 33.05, 33.01, 31.57, 33.05] GB/s
+2026-08-25 10:28:03.649 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group ETP
+2026-08-25 10:28:04.454 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [ETP] (10 tries):
+>> Avg [9.40, 135.76, 139.07, 201.84, 183.40, 172.61, 155.04, 209.30, 175.73, 163.99] GB/s
+>> Min [9.39, 135.69, 138.99, 201.70, 183.11, 172.52, 154.99, 209.16, 175.57, 163.93] GB/s
+2026-08-25 10:28:04.454 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EETP
+2026-08-25 10:28:05.440 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EETP] (10 tries):
+>> Avg [33.92, 33.93, 34.79, 32.15, 33.74, 33.36, 33.90, 31.27, 14.13, 33.85] GB/s
+>> Min [33.91, 33.92, 34.78, 32.15, 33.74, 33.35, 33.90, 31.26, 14.13, 33.85] GB/s
+2026-08-25 10:28:05.440 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EDP
+2026-08-25 10:28:05.900 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EDP] (10 tries):
+>> Avg [192.85, 134.58, 160.62, 167.70, 196.91, 149.87, 179.28, 209.72, 159.55, 200.41] GB/s
+>> Min [192.69, 134.52, 160.47, 167.65, 196.85, 147.55, 179.18, 203.95, 159.27, 200.15] GB/s
+2026-08-25 10:28:05.901 | DEBUG    | steptronoss.utils.utils:profile_allreduce:408 - start all reduce of group EMP
+2026-08-25 10:28:07.580 | INFO     | steptronoss.utils.utils:profile_allreduce:432 - Group allreduce [EMP] (10 tries):
+>> Avg [3.04, 26.89, 25.33, 25.38, 25.85, 27.12, 25.60, 24.67, 20.90, 29.15] GB/s
+>> Min [3.04, 26.89, 25.33, 25.37, 25.85, 27.12, 25.60, 24.67, 20.89, 29.14] GB/s
+2026-08-25 10:28:07.660 | INFO     | steptronoss.checkpointing.local_checkpoint:load_ckpt:258 - Loading safetensors from /data/plms/stepfun-ai/Step-3.7-Flash, pt weight will be skipped.
+2026-08-25 10:28:07.668 | INFO     | steptronoss.model.decoder_model:__init__:202 - {
+  pp0/vp0: {
+    0-22: {recompute: True}
+  }
+  pp1/vp0: {
+    23-44: {recompute: True}
+  }
+}
+2026-08-25 10:28:07.805 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:08.019 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:08.233 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:08.593 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:08.802 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:09.013 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:09.358 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:09.569 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:09.776 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:10.121 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:10.325 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:10.542 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:10.900 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:11.109 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:11.312 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:11.670 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:11.880 | WARNING  | steptronoss.model.common.rope:__init__:74 - max_position_embedding larger than one rotation period (62831)!
+2026-08-25 10:28:22.819 | INFO     | steptronoss.model.utils.utils:load_model_checkpoint:59 - <All keys matched successfully>
+2026-08-25 10:28:22.840 | INFO     | steptronoss.optimizer.utils:advanced_get_param_groups:67 - Optim group 0 -> # params: 7.516M; wd_mult: 1.0; lr_mult: 1.0
+2026-08-25 10:28:22.845 | INFO     | steptronoss.optimizer.base_gradient_manager:__init__:91 - Gradbuffer: ParamBucketKey(dtype=torch.bfloat16, allreduce_group='DP', signature='MUON:False'), dp_world_size: 2
+2026-08-25 10:28:24.663 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ after dataloaders are built ]
+2026-08-25 10:28:29.809 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ before the start of training step ]
+2026-08-25 10:30:14.241 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        0/      20 | cum-tokens: 81.92K | ms/iter: 99888.6 | tokens-per-second-per-card: 25.6 | lr: 9.985E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.101
+2026-08-25 10:31:30.674 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        1/      20 | cum-tokens: 163.84K | ms/iter: 75884.1 | tokens-per-second-per-card: 33.7 | lr: 9.878E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 3.720
+2026-08-25 10:32:46.099 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        2/      20 | cum-tokens: 245.76K | ms/iter: 76200.1 | tokens-per-second-per-card: 33.6 | lr: 9.728E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 2.362
+2026-08-25 10:34:00.777 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        3/      20 | cum-tokens: 327.68K | ms/iter: 74157.8 | tokens-per-second-per-card: 34.5 | lr: 9.523E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.816
+2026-08-25 10:35:16.249 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        4/      20 | cum-tokens: 409.6K | ms/iter: 75796.1 | tokens-per-second-per-card: 33.8 | lr: 9.268E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.245
+2026-08-25 10:36:31.401 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        5/      20 | cum-tokens: 491.52K | ms/iter: 74998.8 | tokens-per-second-per-card: 34.1 | lr: 8.969E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.691
+2026-08-25 10:37:46.171 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        6/      20 | cum-tokens: 573.44K | ms/iter: 74626.5 | tokens-per-second-per-card: 34.3 | lr: 8.635E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.725
+2026-08-25 10:39:01.340 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        7/      20 | cum-tokens: 655.36K | ms/iter: 75365.9 | tokens-per-second-per-card: 34.0 | lr: 8.273E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.366
+2026-08-25 10:40:16.614 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        8/      20 | cum-tokens: 737.28K | ms/iter: 74936.2 | tokens-per-second-per-card: 34.2 | lr: 7.891E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.480
+2026-08-25 10:41:31.346 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:        9/      20 | cum-tokens: 819.2K | ms/iter: 75131.4 | tokens-per-second-per-card: 34.1 | lr: 7.500E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.271
+2026-08-25 10:42:47.632 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:       10/      20 | cum-tokens: 901.12K | ms/iter: 75989.4 | tokens-per-second-per-card: 33.7 | lr: 7.109E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.141
+2026-08-25 10:42:47.749 | INFO     | steptronoss.core.trainers.lm_trainer:sync_point:492 - Sync point [ ready for dump ]
+2026-08-25 10:42:48.222 | INFO     | steptronoss.checkpointing.local_checkpoint:size_stat:118 - TP03_PP000_DP000.pt: NOTENSOR | TP03_PP000_DP000_OPT.pt: 0.0 G
+2026-08-25 10:42:48.254 | INFO     | steptronoss.checkpointing.local_checkpoint:_dump_with_callback:501 - <Uploader:3>: Started dumping to /data/projects/tangbo/SteptronOss/checkpoints/step3p7_flash_sft_step3_data_muon/lora/it10/TP03_PP000_DP000.pt
+2026-08-25 10:42:48.394 | INFO     | steptronoss.checkpointing.local_checkpoint:_dump_with_callback:501 - <Uploader:3>: Started dumping to /data/projects/tangbo/SteptronOss/checkpoints/step3p7_flash_sft_step3_data_muon/lora/it10/TP03_PP000_DP000_OPT.pt
+2026-08-25 10:42:50.102 | INFO     | steptronoss.checkpointing.local_checkpoint:_dump_with_callback:514 - Finished uploading: [27 / 32]
+2026-08-25 10:44:04.351 | INFO     | steptronoss.core.trainers.lm_trainer:training_log:338 - iter:       11/      20 | cum-tokens: 983.04K | ms/iter: 76698.0 | tokens-per-second-per-card: 33.4 | lr: 6.727E-06 | batch-size:    16 | #skipped-iters: 0 | grad-norm: 0.089
