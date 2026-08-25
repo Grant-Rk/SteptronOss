@@ -127,11 +127,24 @@ class Checkpointer:
         extra_info: dict | None = {},
     ) -> FileObjects:
 
+        # LoRA-only exports are intentionally not resumable native
+        # checkpoints. The adapter tensors are written to hf_lora/ by
+        # dump_safetensors(), so do not create rank .pt files here.
+        if cfg.save_lora_only:
+            return {}
+
         file_dicts: FileObjects = {}
         # Collect args, model, RNG.
         model_state_dict, optim_state_dict = {}, {}
 
-        if cfg.save_option.model:
+        # ZeRO-3 parameter gathering is collective, so all ranks must enter it
+        # before only the designated data-parallel rank creates model state.
+        if cfg.save_option.model and not cfg.save_lora_only and optimizer is not None:
+            optimizer.prepare_for_state_dict()
+
+        # LoRA-only checkpoints export adapter weights through hf_lora/.  Do
+        # not duplicate the frozen base model in the native rank shards.
+        if cfg.save_option.model and not cfg.save_lora_only:
             # Determine whether this rank should save model
             if PM.i_am("DP", 0) or PM.i_am("EDP", 0):
                 # Arguments, iteration, and model.
@@ -198,14 +211,30 @@ class Checkpointer:
 
         extra_info["iteration"] = iteration
 
+        # ZeRO-3 releases non-local parameter shards after each step. Both the
+        # HF exporter and the regular checkpoint need materialized parameters,
+        # and every rank must enter this gather before export collectives.
+        save_native_model = cfg.save_option.model and not cfg.save_lora_only
+        if optimizer is not None and (cfg.save_safetensors or save_native_model):
+            optimizer.prepare_for_state_dict()
+
         # Save safetensors if configured
         if cfg.save_safetensors:
             dump_safetensors(
-                save_path=join(path_with_subname, "hf"),
+                save_path=join(path_with_subname, "hf_lora" if cfg.save_lora_only else "hf"),
                 model_reference_path=cfg.model_config_path,
                 tokenizer_reference_path=cfg.tokenizer_path,
                 models=model,
+                lora_only=cfg.save_lora_only,
             )
+
+        if cfg.save_lora_only:
+            logger.info(
+                f"Saved LoRA adapter weights to {join(path_with_subname, 'hf_lora')}; "
+                "native .pt checkpoint files are disabled.",
+                at=0,
+            )
+            return
 
         file_dicts = self.make_ckpt(
             cfg=cfg,
